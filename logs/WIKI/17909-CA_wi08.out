@@ -1,0 +1,18 @@
+Namespace(gpu=0, batch_size=1, dataset='WIKI', test=False, run_analysis=False, run_statistic=False, multi_step=False, topk=10, add_static_graph=True, add_rel_word=False, relation_evaluation=False, alpha=0.8, n_epochs_classifier=2, linear_classifier=True, linear_lr=0.001, linear_classifier_mode='soft', load_pretrain=False, encoder='uvrgcn', aggregation='none', dropout=0.2, skip_connect=False, n_hidden=200, opn='sub', n_bases=100, n_basis=100, n_layers=2, self_loop=True, layer_norm=True, entity_prediction=True, split_by_relation=False, n_epochs=100, lr=0.001, grad_norm=1.0, evaluate_every=2, decoder='convtranse', input_dropout=0.2, hidden_dropout=0.2, feat_dropout=0.2, train_history_len=3, test_history_len=3, dilate_len=1, tune='n_hidden,n_layers,dropout,n_bases', num_k=500)
+loading graph data
+../data/WIKI
+# Sanity Check:  entities: 12554
+# Sanity Check:  relations: 24
+# Sanity Check:  edges: 539286
+# Sanity Check:  ave node num : 2544.971564, ave rel num : 41.033175, snapshots num: 0211, max edges num: 4914, min edges num: 1512, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 5551.363636, ave rel num : 48.000000, snapshots num: 0011, max edges num: 7102, min edges num: 5173, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 5559.900000, ave rel num : 47.800000, snapshots num: 0010, max edges num: 7122, min edges num: 4936, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 5559.900000, ave rel num : 47.800000, snapshots num: 0010, max edges num: 7122, min edges num: 4936, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 5551.363636, ave rel num : 48.000000, snapshots num: 0011, max edges num: 7102, min edges num: 5173, max union rate: 1.0000, min union rate: 1.0000
+Sanity Check: stat name : ../models/WIKI-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0
+Sanity Check: Is cuda available ? False
+use layer :uvrgcn
+activate function: <function rrelu at 0x7f38b1ab57e0>
+activate function: <function rrelu at 0x7f38b1ab57e0>
+----------------------------------------start training----------------------------------------
+

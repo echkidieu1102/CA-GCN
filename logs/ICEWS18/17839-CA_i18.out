@@ -1,0 +1,538 @@
+Setting the default backend to "pytorch". You can change it in the ~/.dgl/config.json file or export the DGLBACKEND environment variable.  Valid options are: pytorch, mxnet, tensorflow (all lowercase)
+Namespace(gpu=0, batch_size=1, dataset='ICEWS18', test=False, run_analysis=False, run_statistic=False, multi_step=False, topk=10, add_static_graph=True, add_rel_word=False, relation_evaluation=False, alpha=0.8, n_epochs_classifier=2, linear_classifier=True, linear_lr=0.001, linear_classifier_mode='soft', load_pretrain=False, encoder='uvrgcn', aggregation='none', dropout=0.2, skip_connect=False, n_hidden=200, opn='sub', n_bases=100, n_basis=100, n_layers=2, self_loop=True, layer_norm=True, entity_prediction=True, split_by_relation=False, n_epochs=100, lr=0.001, grad_norm=1.0, evaluate_every=2, decoder='convtranse', input_dropout=0.2, hidden_dropout=0.2, feat_dropout=0.2, train_history_len=3, test_history_len=3, dilate_len=1, tune='n_hidden,n_layers,dropout,n_bases', num_k=500)
+loading graph data
+../data/ICEWS18
+# Sanity Check:  entities: 23033
+# Sanity Check:  relations: 256
+# Sanity Check:  edges: 373018
+# Sanity Check:  ave node num : 993.937500, ave rel num : 203.275000, snapshots num: 0240, max edges num: 2371, min edges num: 0665, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 969.466667, ave rel num : 199.533333, snapshots num: 0030, max edges num: 2106, min edges num: 0913, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 948.529412, ave rel num : 195.294118, snapshots num: 0034, max edges num: 1988, min edges num: 0800, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 948.529412, ave rel num : 195.294118, snapshots num: 0034, max edges num: 1988, min edges num: 0800, max union rate: 1.0000, min union rate: 1.0000
+# Sanity Check:  ave node num : 969.466667, ave rel num : 199.533333, snapshots num: 0030, max edges num: 2106, min edges num: 0913, max union rate: 1.0000, min union rate: 1.0000
+Sanity Check: stat name : ../models/ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0
+Sanity Check: Is cuda available ? True
+use layer :uvrgcn
+activate function: <function rrelu at 0x7f355899d7e0>
+activate function: <function rrelu at 0x7f355899d7e0>
+----------------------------------------start training----------------------------------------
+
+Epoch 0000 | Ave Loss: 7.4734 | entity:7.4734 Best MRR 0.0000 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0001 | Ave Loss: 7.1062 | entity:7.1062 Best MRR 0.0000 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.159115
+Hits (raw_ent) @ 1: 0.093521
+Hits (raw_ent) @ 3: 0.173954
+Hits (raw_ent) @ 10: 0.293108
+MRR (filter_ent): 0.166167
+Hits (filter_ent) @ 1: 0.101109
+Hits (filter_ent) @ 3: 0.182085
+Hits (filter_ent) @ 10: 0.297565
+Epoch 0002 | Ave Loss: 6.9597 | entity:6.9597 Best MRR 0.1591 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0003 | Ave Loss: 6.7969 | entity:6.7969 Best MRR 0.1591 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.182812
+Hits (raw_ent) @ 1: 0.110686
+Hits (raw_ent) @ 3: 0.200728
+Hits (raw_ent) @ 10: 0.329895
+MRR (filter_ent): 0.191022
+Hits (filter_ent) @ 1: 0.119763
+Hits (filter_ent) @ 3: 0.209577
+Hits (filter_ent) @ 10: 0.334917
+Epoch 0004 | Ave Loss: 6.6374 | entity:6.6374 Best MRR 0.1828 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0005 | Ave Loss: 6.5057 | entity:6.5057 Best MRR 0.1828 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.202188
+Hits (raw_ent) @ 1: 0.124177
+Hits (raw_ent) @ 3: 0.222916
+Hits (raw_ent) @ 10: 0.361952
+MRR (filter_ent): 0.211478
+Hits (filter_ent) @ 1: 0.134667
+Hits (filter_ent) @ 3: 0.232982
+Hits (filter_ent) @ 10: 0.367051
+Epoch 0006 | Ave Loss: 6.3791 | entity:6.3791 Best MRR 0.2022 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0007 | Ave Loss: 6.2746 | entity:6.2746 Best MRR 0.2022 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.209741
+Hits (raw_ent) @ 1: 0.128036
+Hits (raw_ent) @ 3: 0.232830
+Hits (raw_ent) @ 10: 0.375628
+MRR (filter_ent): 0.219266
+Hits (filter_ent) @ 1: 0.138743
+Hits (filter_ent) @ 3: 0.242744
+Hits (filter_ent) @ 10: 0.380900
+Epoch 0008 | Ave Loss: 6.1918 | entity:6.1918 Best MRR 0.2097 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0009 | Ave Loss: 6.1233 | entity:6.1233 Best MRR 0.2097 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.217209
+Hits (raw_ent) @ 1: 0.132069
+Hits (raw_ent) @ 3: 0.241461
+Hits (raw_ent) @ 10: 0.390782
+MRR (filter_ent): 0.226801
+Hits (filter_ent) @ 1: 0.143048
+Hits (filter_ent) @ 3: 0.251212
+Hits (filter_ent) @ 10: 0.396597
+Epoch 0010 | Ave Loss: 6.0673 | entity:6.0673 Best MRR 0.2172 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0011 | Ave Loss: 6.0205 | entity:6.0205 Best MRR 0.2172 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.224294
+Hits (raw_ent) @ 1: 0.137711
+Hits (raw_ent) @ 3: 0.248527
+Hits (raw_ent) @ 10: 0.402142
+MRR (filter_ent): 0.234250
+Hits (filter_ent) @ 1: 0.149092
+Hits (filter_ent) @ 3: 0.258996
+Hits (filter_ent) @ 10: 0.407849
+Epoch 0012 | Ave Loss: 5.9825 | entity:5.9825 Best MRR 0.2243 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0013 | Ave Loss: 5.9458 | entity:5.9458 Best MRR 0.2243 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.227835
+Hits (raw_ent) @ 1: 0.139743
+Hits (raw_ent) @ 3: 0.253658
+Hits (raw_ent) @ 10: 0.408229
+MRR (filter_ent): 0.237849
+Hits (filter_ent) @ 1: 0.151256
+Hits (filter_ent) @ 3: 0.263974
+Hits (filter_ent) @ 10: 0.414349
+Epoch 0014 | Ave Loss: 5.9105 | entity:5.9105 Best MRR 0.2278 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0015 | Ave Loss: 5.8822 | entity:5.8822 Best MRR 0.2278 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.233206
+Hits (raw_ent) @ 1: 0.143211
+Hits (raw_ent) @ 3: 0.260604
+Hits (raw_ent) @ 10: 0.415252
+MRR (filter_ent): 0.243574
+Hits (filter_ent) @ 1: 0.155028
+Hits (filter_ent) @ 3: 0.271236
+Hits (filter_ent) @ 10: 0.421665
+Epoch 0016 | Ave Loss: 5.8606 | entity:5.8606 Best MRR 0.2332 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0017 | Ave Loss: 5.8336 | entity:5.8336 Best MRR 0.2332 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.236958
+Hits (raw_ent) @ 1: 0.146059
+Hits (raw_ent) @ 3: 0.264909
+Hits (raw_ent) @ 10: 0.421774
+MRR (filter_ent): 0.247759
+Hits (filter_ent) @ 1: 0.158343
+Hits (filter_ent) @ 3: 0.276063
+Hits (filter_ent) @ 10: 0.427579
+Epoch 0018 | Ave Loss: 5.8095 | entity:5.8095 Best MRR 0.2370 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0019 | Ave Loss: 5.7891 | entity:5.7891 Best MRR 0.2370 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.240309
+Hits (raw_ent) @ 1: 0.149114
+Hits (raw_ent) @ 3: 0.267931
+Hits (raw_ent) @ 10: 0.426144
+MRR (filter_ent): 0.250917
+Hits (filter_ent) @ 1: 0.161202
+Hits (filter_ent) @ 3: 0.278759
+Hits (filter_ent) @ 10: 0.432504
+Epoch 0020 | Ave Loss: 5.7691 | entity:5.7691 Best MRR 0.2403 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0021 | Ave Loss: 5.7473 | entity:5.7473 Best MRR 0.2403 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.243181
+Hits (raw_ent) @ 1: 0.151669
+Hits (raw_ent) @ 3: 0.271106
+Hits (raw_ent) @ 10: 0.430003
+MRR (filter_ent): 0.254240
+Hits (filter_ent) @ 1: 0.164724
+Hits (filter_ent) @ 3: 0.281846
+Hits (filter_ent) @ 10: 0.435721
+Epoch 0022 | Ave Loss: 5.7239 | entity:5.7239 Best MRR 0.2432 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0023 | Ave Loss: 5.7069 | entity:5.7069 Best MRR 0.2432 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.188132
+Hits (raw_ent) @ 1: 0.107120
+Hits (raw_ent) @ 3: 0.203935
+Hits (raw_ent) @ 10: 0.358713
+MRR (filter_ent): 0.194595
+Hits (filter_ent) @ 1: 0.113545
+Hits (filter_ent) @ 3: 0.212697
+Hits (filter_ent) @ 10: 0.364605
+Epoch 0024 | Ave Loss: 5.6929 | entity:5.6929 Best MRR 0.2432 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0025 | Ave Loss: 5.6759 | entity:5.6759 Best MRR 0.2432 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.248933
+Hits (raw_ent) @ 1: 0.156224
+Hits (raw_ent) @ 3: 0.277639
+Hits (raw_ent) @ 10: 0.438613
+MRR (filter_ent): 0.260142
+Hits (filter_ent) @ 1: 0.169258
+Hits (filter_ent) @ 3: 0.288401
+Hits (filter_ent) @ 10: 0.444624
+Epoch 0026 | Ave Loss: 5.6618 | entity:5.6618 Best MRR 0.2489 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0027 | Ave Loss: 5.6496 | entity:5.6496 Best MRR 0.2489 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.251573
+Hits (raw_ent) @ 1: 0.157245
+Hits (raw_ent) @ 3: 0.281944
+Hits (raw_ent) @ 10: 0.443374
+MRR (filter_ent): 0.263192
+Hits (filter_ent) @ 1: 0.170834
+Hits (filter_ent) @ 3: 0.293532
+Hits (filter_ent) @ 10: 0.449277
+Epoch 0028 | Ave Loss: 5.6352 | entity:5.6352 Best MRR 0.2516 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0029 | Ave Loss: 5.6225 | entity:5.6225 Best MRR 0.2516 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.253456
+Hits (raw_ent) @ 1: 0.158093
+Hits (raw_ent) @ 3: 0.285064
+Hits (raw_ent) @ 10: 0.446244
+MRR (filter_ent): 0.265200
+Hits (filter_ent) @ 1: 0.171780
+Hits (filter_ent) @ 3: 0.296739
+Hits (filter_ent) @ 10: 0.452386
+Epoch 0030 | Ave Loss: 5.6093 | entity:5.6093 Best MRR 0.2535 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0031 | Ave Loss: 5.5951 | entity:5.5951 Best MRR 0.2535 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.253251
+Hits (raw_ent) @ 1: 0.158072
+Hits (raw_ent) @ 3: 0.284194
+Hits (raw_ent) @ 10: 0.445853
+MRR (filter_ent): 0.264796
+Hits (filter_ent) @ 1: 0.171573
+Hits (filter_ent) @ 3: 0.295782
+Hits (filter_ent) @ 10: 0.451745
+Epoch 0032 | Ave Loss: 5.5889 | entity:5.5889 Best MRR 0.2535 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0033 | Ave Loss: 5.5736 | entity:5.5736 Best MRR 0.2535 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.255638
+Hits (raw_ent) @ 1: 0.161257
+Hits (raw_ent) @ 3: 0.286107
+Hits (raw_ent) @ 10: 0.446614
+MRR (filter_ent): 0.267282
+Hits (filter_ent) @ 1: 0.174921
+Hits (filter_ent) @ 3: 0.297228
+Hits (filter_ent) @ 10: 0.452614
+Epoch 0034 | Ave Loss: 5.5657 | entity:5.5657 Best MRR 0.2556 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0035 | Ave Loss: 5.5582 | entity:5.5582 Best MRR 0.2556 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.255226
+Hits (raw_ent) @ 1: 0.159735
+Hits (raw_ent) @ 3: 0.286477
+Hits (raw_ent) @ 10: 0.448407
+MRR (filter_ent): 0.266966
+Hits (filter_ent) @ 1: 0.173573
+Hits (filter_ent) @ 3: 0.298272
+Hits (filter_ent) @ 10: 0.454963
+Epoch 0036 | Ave Loss: 5.5515 | entity:5.5515 Best MRR 0.2556 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0037 | Ave Loss: 5.5397 | entity:5.5397 Best MRR 0.2556 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.258055
+Hits (raw_ent) @ 1: 0.162398
+Hits (raw_ent) @ 3: 0.288705
+Hits (raw_ent) @ 10: 0.452723
+MRR (filter_ent): 0.270278
+Hits (filter_ent) @ 1: 0.177008
+Hits (filter_ent) @ 3: 0.300946
+Hits (filter_ent) @ 10: 0.458876
+Epoch 0038 | Ave Loss: 5.5315 | entity:5.5315 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0039 | Ave Loss: 5.5250 | entity:5.5250 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.255170
+Hits (raw_ent) @ 1: 0.159376
+Hits (raw_ent) @ 3: 0.286455
+Hits (raw_ent) @ 10: 0.449310
+MRR (filter_ent): 0.267040
+Hits (filter_ent) @ 1: 0.173812
+Hits (filter_ent) @ 3: 0.297663
+Hits (filter_ent) @ 10: 0.455637
+Epoch 0040 | Ave Loss: 5.5164 | entity:5.5164 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0041 | Ave Loss: 5.5087 | entity:5.5087 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.256456
+Hits (raw_ent) @ 1: 0.160963
+Hits (raw_ent) @ 3: 0.287499
+Hits (raw_ent) @ 10: 0.451299
+MRR (filter_ent): 0.268440
+Hits (filter_ent) @ 1: 0.175302
+Hits (filter_ent) @ 3: 0.298772
+Hits (filter_ent) @ 10: 0.457854
+Epoch 0042 | Ave Loss: 5.4997 | entity:5.4997 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0043 | Ave Loss: 5.4930 | entity:5.4930 Best MRR 0.2581 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.260221
+Hits (raw_ent) @ 1: 0.164659
+Hits (raw_ent) @ 3: 0.291586
+Hits (raw_ent) @ 10: 0.455245
+MRR (filter_ent): 0.272425
+Hits (filter_ent) @ 1: 0.179356
+Hits (filter_ent) @ 3: 0.302892
+Hits (filter_ent) @ 10: 0.461398
+Epoch 0044 | Ave Loss: 5.4803 | entity:5.4803 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0045 | Ave Loss: 5.4794 | entity:5.4794 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.259797
+Hits (raw_ent) @ 1: 0.164127
+Hits (raw_ent) @ 3: 0.291086
+Hits (raw_ent) @ 10: 0.453506
+MRR (filter_ent): 0.271984
+Hits (filter_ent) @ 1: 0.178954
+Hits (filter_ent) @ 3: 0.302609
+Hits (filter_ent) @ 10: 0.459680
+Epoch 0046 | Ave Loss: 5.4711 | entity:5.4711 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0047 | Ave Loss: 5.4596 | entity:5.4596 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.244234
+Hits (raw_ent) @ 1: 0.151212
+Hits (raw_ent) @ 3: 0.273280
+Hits (raw_ent) @ 10: 0.430079
+MRR (filter_ent): 0.254462
+Hits (filter_ent) @ 1: 0.162985
+Hits (filter_ent) @ 3: 0.283987
+Hits (filter_ent) @ 10: 0.436330
+Epoch 0048 | Ave Loss: 5.4524 | entity:5.4524 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0049 | Ave Loss: 5.4469 | entity:5.4469 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.097379
+Hits (raw_ent) @ 1: 0.041733
+Hits (raw_ent) @ 3: 0.097576
+Hits (raw_ent) @ 10: 0.213338
+MRR (filter_ent): 0.099751
+Hits (filter_ent) @ 1: 0.043744
+Hits (filter_ent) @ 3: 0.100315
+Hits (filter_ent) @ 10: 0.216252
+Epoch 0050 | Ave Loss: 5.4430 | entity:5.4430 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0051 | Ave Loss: 5.4405 | entity:5.4405 Best MRR 0.2602 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.262329
+Hits (raw_ent) @ 1: 0.165942
+Hits (raw_ent) @ 3: 0.294717
+Hits (raw_ent) @ 10: 0.458093
+MRR (filter_ent): 0.274891
+Hits (filter_ent) @ 1: 0.181444
+Hits (filter_ent) @ 3: 0.306490
+Hits (filter_ent) @ 10: 0.464116
+Epoch 0052 | Ave Loss: 5.4322 | entity:5.4322 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0053 | Ave Loss: 5.4242 | entity:5.4242 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.261946
+Hits (raw_ent) @ 1: 0.166159
+Hits (raw_ent) @ 3: 0.293130
+Hits (raw_ent) @ 10: 0.456724
+MRR (filter_ent): 0.274238
+Hits (filter_ent) @ 1: 0.181031
+Hits (filter_ent) @ 3: 0.304522
+Hits (filter_ent) @ 10: 0.462463
+Epoch 0054 | Ave Loss: 5.4212 | entity:5.4212 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0055 | Ave Loss: 5.4207 | entity:5.4207 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.261621
+Hits (raw_ent) @ 1: 0.164627
+Hits (raw_ent) @ 3: 0.294445
+Hits (raw_ent) @ 10: 0.458746
+MRR (filter_ent): 0.273950
+Hits (filter_ent) @ 1: 0.179487
+Hits (filter_ent) @ 3: 0.306696
+Hits (filter_ent) @ 10: 0.464811
+Epoch 0056 | Ave Loss: 5.4110 | entity:5.4110 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0057 | Ave Loss: 5.4087 | entity:5.4087 Best MRR 0.2623 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.264695
+Hits (raw_ent) @ 1: 0.167410
+Hits (raw_ent) @ 3: 0.298663
+Hits (raw_ent) @ 10: 0.460257
+MRR (filter_ent): 0.277199
+Hits (filter_ent) @ 1: 0.182835
+Hits (filter_ent) @ 3: 0.310403
+Hits (filter_ent) @ 10: 0.466714
+Epoch 0058 | Ave Loss: 5.3978 | entity:5.3978 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0059 | Ave Loss: 5.3995 | entity:5.3995 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.264091
+Hits (raw_ent) @ 1: 0.166996
+Hits (raw_ent) @ 3: 0.297098
+Hits (raw_ent) @ 10: 0.459115
+MRR (filter_ent): 0.276620
+Hits (filter_ent) @ 1: 0.182335
+Hits (filter_ent) @ 3: 0.308479
+Hits (filter_ent) @ 10: 0.465398
+Epoch 0060 | Ave Loss: 5.3925 | entity:5.3925 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0061 | Ave Loss: 5.3860 | entity:5.3860 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.263308
+Hits (raw_ent) @ 1: 0.166768
+Hits (raw_ent) @ 3: 0.296521
+Hits (raw_ent) @ 10: 0.457213
+MRR (filter_ent): 0.276081
+Hits (filter_ent) @ 1: 0.182498
+Hits (filter_ent) @ 3: 0.307990
+Hits (filter_ent) @ 10: 0.463550
+Epoch 0062 | Ave Loss: 5.3847 | entity:5.3847 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0063 | Ave Loss: 5.3788 | entity:5.3788 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.264658
+Hits (raw_ent) @ 1: 0.168323
+Hits (raw_ent) @ 3: 0.297315
+Hits (raw_ent) @ 10: 0.459050
+MRR (filter_ent): 0.277339
+Hits (filter_ent) @ 1: 0.183879
+Hits (filter_ent) @ 3: 0.309121
+Hits (filter_ent) @ 10: 0.465127
+Epoch 0064 | Ave Loss: 5.3761 | entity:5.3761 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0065 | Ave Loss: 5.3683 | entity:5.3683 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.264562
+Hits (raw_ent) @ 1: 0.167290
+Hits (raw_ent) @ 3: 0.297641
+Hits (raw_ent) @ 10: 0.460768
+MRR (filter_ent): 0.277040
+Hits (filter_ent) @ 1: 0.182302
+Hits (filter_ent) @ 3: 0.309936
+Hits (filter_ent) @ 10: 0.467236
+Epoch 0066 | Ave Loss: 5.3680 | entity:5.3680 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0067 | Ave Loss: 5.3651 | entity:5.3651 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.264253
+Hits (raw_ent) @ 1: 0.167779
+Hits (raw_ent) @ 3: 0.296445
+Hits (raw_ent) @ 10: 0.459800
+MRR (filter_ent): 0.276953
+Hits (filter_ent) @ 1: 0.183161
+Hits (filter_ent) @ 3: 0.308707
+Hits (filter_ent) @ 10: 0.465996
+Epoch 0068 | Ave Loss: 5.3619 | entity:5.3619 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0069 | Ave Loss: 5.3542 | entity:5.3542 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.263936
+Hits (raw_ent) @ 1: 0.166931
+Hits (raw_ent) @ 3: 0.296206
+Hits (raw_ent) @ 10: 0.460039
+MRR (filter_ent): 0.276524
+Hits (filter_ent) @ 1: 0.182259
+Hits (filter_ent) @ 3: 0.308523
+Hits (filter_ent) @ 10: 0.466442
+Epoch 0070 | Ave Loss: 5.3496 | entity:5.3496 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0071 | Ave Loss: 5.3520 | entity:5.3520 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.119307
+Hits (raw_ent) @ 1: 0.050353
+Hits (raw_ent) @ 3: 0.133797
+Hits (raw_ent) @ 10: 0.256278
+MRR (filter_ent): 0.122196
+Hits (filter_ent) @ 1: 0.052604
+Hits (filter_ent) @ 3: 0.138080
+Hits (filter_ent) @ 10: 0.259854
+Epoch 0072 | Ave Loss: 5.3521 | entity:5.3521 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0073 | Ave Loss: 5.3470 | entity:5.3470 Best MRR 0.2647 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265437
+Hits (raw_ent) @ 1: 0.169225
+Hits (raw_ent) @ 3: 0.297413
+Hits (raw_ent) @ 10: 0.459376
+MRR (filter_ent): 0.278247
+Hits (filter_ent) @ 1: 0.184694
+Hits (filter_ent) @ 3: 0.309969
+Hits (filter_ent) @ 10: 0.465779
+Epoch 0074 | Ave Loss: 5.3477 | entity:5.3477 Best MRR 0.2654 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0075 | Ave Loss: 5.3416 | entity:5.3416 Best MRR 0.2654 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.266023
+Hits (raw_ent) @ 1: 0.169725
+Hits (raw_ent) @ 3: 0.297913
+Hits (raw_ent) @ 10: 0.461072
+MRR (filter_ent): 0.278696
+Hits (filter_ent) @ 1: 0.185335
+Hits (filter_ent) @ 3: 0.309610
+Hits (filter_ent) @ 10: 0.467344
+Epoch 0076 | Ave Loss: 5.3340 | entity:5.3340 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0077 | Ave Loss: 5.3243 | entity:5.3243 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265041
+Hits (raw_ent) @ 1: 0.168475
+Hits (raw_ent) @ 3: 0.298750
+Hits (raw_ent) @ 10: 0.459017
+MRR (filter_ent): 0.277932
+Hits (filter_ent) @ 1: 0.184466
+Hits (filter_ent) @ 3: 0.310392
+Hits (filter_ent) @ 10: 0.465366
+Epoch 0078 | Ave Loss: 5.3238 | entity:5.3238 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0079 | Ave Loss: 5.3243 | entity:5.3243 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265959
+Hits (raw_ent) @ 1: 0.169855
+Hits (raw_ent) @ 3: 0.298859
+Hits (raw_ent) @ 10: 0.461691
+MRR (filter_ent): 0.278874
+Hits (filter_ent) @ 1: 0.185781
+Hits (filter_ent) @ 3: 0.310719
+Hits (filter_ent) @ 10: 0.467768
+Epoch 0080 | Ave Loss: 5.3216 | entity:5.3216 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0081 | Ave Loss: 5.3197 | entity:5.3197 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265400
+Hits (raw_ent) @ 1: 0.168312
+Hits (raw_ent) @ 3: 0.299130
+Hits (raw_ent) @ 10: 0.461137
+MRR (filter_ent): 0.278410
+Hits (filter_ent) @ 1: 0.184379
+Hits (filter_ent) @ 3: 0.311284
+Hits (filter_ent) @ 10: 0.467899
+Epoch 0082 | Ave Loss: 5.3117 | entity:5.3117 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0083 | Ave Loss: 5.3085 | entity:5.3085 Best MRR 0.2660 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.266701
+Hits (raw_ent) @ 1: 0.170116
+Hits (raw_ent) @ 3: 0.299946
+Hits (raw_ent) @ 10: 0.460093
+MRR (filter_ent): 0.279919
+Hits (filter_ent) @ 1: 0.186683
+Hits (filter_ent) @ 3: 0.311273
+Hits (filter_ent) @ 10: 0.466018
+Epoch 0084 | Ave Loss: 5.3061 | entity:5.3061 Best MRR 0.2667 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0085 | Ave Loss: 5.3076 | entity:5.3076 Best MRR 0.2667 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.267105
+Hits (raw_ent) @ 1: 0.170649
+Hits (raw_ent) @ 3: 0.300804
+Hits (raw_ent) @ 10: 0.461224
+MRR (filter_ent): 0.280021
+Hits (filter_ent) @ 1: 0.186509
+Hits (filter_ent) @ 3: 0.312675
+Hits (filter_ent) @ 10: 0.468007
+Epoch 0086 | Ave Loss: 5.3072 | entity:5.3072 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0087 | Ave Loss: 5.3021 | entity:5.3021 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.263535
+Hits (raw_ent) @ 1: 0.166235
+Hits (raw_ent) @ 3: 0.297587
+Hits (raw_ent) @ 10: 0.460376
+MRR (filter_ent): 0.276438
+Hits (filter_ent) @ 1: 0.182335
+Hits (filter_ent) @ 3: 0.309860
+Hits (filter_ent) @ 10: 0.466431
+Epoch 0088 | Ave Loss: 5.3015 | entity:5.3015 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0089 | Ave Loss: 5.3009 | entity:5.3009 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265640
+Hits (raw_ent) @ 1: 0.167638
+Hits (raw_ent) @ 3: 0.300098
+Hits (raw_ent) @ 10: 0.461746
+MRR (filter_ent): 0.278424
+Hits (filter_ent) @ 1: 0.183563
+Hits (filter_ent) @ 3: 0.311708
+Hits (filter_ent) @ 10: 0.467692
+Epoch 0090 | Ave Loss: 5.2940 | entity:5.2940 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0091 | Ave Loss: 5.2895 | entity:5.2895 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265009
+Hits (raw_ent) @ 1: 0.168507
+Hits (raw_ent) @ 3: 0.298674
+Hits (raw_ent) @ 10: 0.457398
+MRR (filter_ent): 0.278065
+Hits (filter_ent) @ 1: 0.184879
+Hits (filter_ent) @ 3: 0.310469
+Hits (filter_ent) @ 10: 0.463442
+Epoch 0092 | Ave Loss: 5.2851 | entity:5.2851 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0093 | Ave Loss: 5.2813 | entity:5.2813 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265293
+Hits (raw_ent) @ 1: 0.167866
+Hits (raw_ent) @ 3: 0.299315
+Hits (raw_ent) @ 10: 0.460768
+MRR (filter_ent): 0.277956
+Hits (filter_ent) @ 1: 0.183487
+Hits (filter_ent) @ 3: 0.311023
+Hits (filter_ent) @ 10: 0.467203
+Epoch 0094 | Ave Loss: 5.2778 | entity:5.2778 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0095 | Ave Loss: 5.2749 | entity:5.2749 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.265422
+Hits (raw_ent) @ 1: 0.168464
+Hits (raw_ent) @ 3: 0.299098
+Hits (raw_ent) @ 10: 0.460963
+MRR (filter_ent): 0.278669
+Hits (filter_ent) @ 1: 0.185074
+Hits (filter_ent) @ 3: 0.311023
+Hits (filter_ent) @ 10: 0.467138
+Epoch 0096 | Ave Loss: 5.2742 | entity:5.2742 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0097 | Ave Loss: 5.2715 | entity:5.2715 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.092734
+Hits (raw_ent) @ 1: 0.036406
+Hits (raw_ent) @ 3: 0.095771
+Hits (raw_ent) @ 10: 0.210186
+MRR (filter_ent): 0.094986
+Hits (filter_ent) @ 1: 0.038222
+Hits (filter_ent) @ 3: 0.098848
+Hits (filter_ent) @ 10: 0.212914
+Epoch 0098 | Ave Loss: 5.2668 | entity:5.2668 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0099 | Ave Loss: 5.2620 | entity:5.2620 Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+MRR (raw_ent): 0.266750
+Hits (raw_ent) @ 1: 0.170192
+Hits (raw_ent) @ 3: 0.299837
+Hits (raw_ent) @ 10: 0.462311
+MRR (filter_ent): 0.279819
+Hits (filter_ent) @ 1: 0.186433
+Hits (filter_ent) @ 3: 0.312001
+Hits (filter_ent) @ 10: 0.468931
+Load Model name: ../models/ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0. Using best epoch : 85
+
+----------start linear classifier----------
+
+Epoch 0000 | Ave Loss: 22.0173 | Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Epoch 0001 | Ave Loss: 3.6889 | Best MRR 0.2671 | Model ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0 
+Load Model name: ../models/ICEWS18-uvrgcn-convtranse-ly2-dilate1-his3-dp0.2|0.2|0.2|0.2-gpu0. Using best epoch : 1
+
+----------start testing----------
+
+BCELoss mask: 0.5687
+MRR (raw_ent): 0.525994
+Hits (raw_ent) @ 1: 0.388324
+Hits (raw_ent) @ 3: 0.601887
+Hits (raw_ent) @ 10: 0.797427
+MRR (filter_ent): 0.550501
+Hits (filter_ent) @ 1: 0.420819
+Hits (filter_ent) @ 3: 0.621132
+Hits (filter_ent) @ 10: 0.806802

@@ -1,0 +1,18 @@
+==> Error: [Errno 37] No locks available
+DGL backend not selected or invalid.  Assuming PyTorch for now.
+Traceback (most recent call last):
+  File "/media/lnthanh01/workspaces/baoanh/CA-GCN/src/main.py", line 11, in <module>
+    from rgcn import utils
+  File "/media/lnthanh01/workspaces/baoanh/CA-GCN/src/../rgcn/utils.py", line 9, in <module>
+    import dgl
+  File "/media/lnthanh01/miniconda3/envs/hoa_env/lib/python3.10/site-packages/dgl/__init__.py", line 14, in <module>
+    from .backend import backend_name, load_backend  # usort: skip
+  File "/media/lnthanh01/miniconda3/envs/hoa_env/lib/python3.10/site-packages/dgl/backend/__init__.py", line 122, in <module>
+    load_backend(get_preferred_backend())
+  File "/media/lnthanh01/miniconda3/envs/hoa_env/lib/python3.10/site-packages/dgl/backend/__init__.py", line 118, in get_preferred_backend
+    set_default_backend(default_dir, "pytorch")
+  File "/media/lnthanh01/miniconda3/envs/hoa_env/lib/python3.10/site-packages/dgl/backend/set_default_backend.py", line 7, in set_default_backend
+    os.makedirs(default_dir, exist_ok=True)
+  File "/media/lnthanh01/miniconda3/envs/hoa_env/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+OSError: [Errno 28] No space left on device: '/home/lnthanh01/.dgl'
