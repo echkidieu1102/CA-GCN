@@ -58,7 +58,7 @@ def test(model, history_list, test_list, num_rels, num_nodes, use_cuda, all_ans_
         
 
     # With snapshot, create sparse matrix (s,r;r) 
-    bce_loss_all = []
+    acc_mask_all = []
     for time_idx, test_snap in enumerate(tqdm(test_list)): 
         triple_with_inverse = add_inverse_rel(test_snap, num_rels)
         seq_idx = triple_with_inverse[:, 0] * num_rel_2 + triple_with_inverse[:, 1] # (s,r) have r
@@ -75,7 +75,7 @@ def test(model, history_list, test_list, num_rels, num_nodes, use_cuda, all_ans_
         test_triples_input = test_triples_input.to(args.gpu)
         
         # Get the frequency from 0 to the current timestamp and create a mask for appearances in history.
-        history_tail_seq, one_hot_tail_seq, one_hot_label_seq = None, None, None
+        history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label = None, None, None, None
 
         # # START
         if mode == "test":
@@ -88,6 +88,11 @@ def test(model, history_list, test_list, num_rels, num_nodes, use_cuda, all_ans_
             else:
                 one_hot_tail_seq = history_tail_seq.masked_fill(history_tail_seq != 0, 1)
 
+            # Trust label
+            trust_label = all_tail_seq_dict[current_timestamp_idx]
+            trust_label_seq = torch.Tensor(trust_label[seq_idx].todense())
+            one_hot_trust_label = trust_label_seq.masked_fill(trust_label_seq != 0, 1)
+
             # Label
             all_label_seq = all_label_seq_dict[current_timestamp_idx-1]
             history_label_seq = torch.Tensor(all_label_seq[seq_label_idx].todense()) # FIX
@@ -97,14 +102,15 @@ def test(model, history_list, test_list, num_rels, num_nodes, use_cuda, all_ans_
             if use_cuda:
                 history_tail_seq, one_hot_tail_seq = history_tail_seq.to(args.gpu), one_hot_tail_seq.to(args.gpu)
                 one_hot_label_seq = one_hot_label_seq.to(args.gpu)
+                one_hot_trust_label = one_hot_trust_label.to(args.gpu)
 
         # # END
         # (tensor)all_triples: (batch_size, 3); (tensor)score: (batch_size, num_ents)
-        test_triples, final_score, loss_mask = model.predict(history_glist, num_rels, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, test_triples_input, use_cuda, mode)
+        test_triples, final_score, acc_mask = model.predict(history_glist, num_rels, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, test_triples_input, use_cuda, mode)
         mrr_filter_snap, mrr_snap, rank_raw, rank_filter = utils.get_total_rank(test_triples, final_score, all_ans_list[time_idx], eval_bz=1000)
 
-        if loss_mask is not None:
-            bce_loss_all.append(loss_mask.item())
+        if acc_mask is not None:
+            acc_mask_all.append(acc_mask)
         # used to global statistic
         ranks_raw.append(rank_raw)
         ranks_filter.append(rank_filter)
@@ -116,7 +122,7 @@ def test(model, history_list, test_list, num_rels, num_nodes, use_cuda, all_ans_
         input_list.append(test_snap)
         idx += 1
     if mode == 'test':
-        print("BCELoss mask: {:.4f}".format(np.mean(bce_loss_all)))
+        print("Acc mask: {:.4f}".format(np.mean(acc_mask_all)))
     mrr_raw = utils.stat_ranks(ranks_raw, "raw_ent")
     mrr_filter = utils.stat_ranks(ranks_filter, "filter_ent")
     return mrr_raw, mrr_filter
@@ -276,6 +282,11 @@ def run_experiment(args, n_hidden=None, n_layers=None, dropout=None, n_bases=Non
                 one_hot_tail_seq = history_tail_seq.masked_fill(history_tail_seq != 0, 1)
                 # history_tail_seq, one_hot_tail_seq = None, None
 
+                # Trust label
+                trust_label = all_tail_seq_dict[train_sample_num]
+                trust_label_seq = torch.Tensor(trust_label[seq_idx].todense())
+                one_hot_trust_label = trust_label_seq.masked_fill(trust_label_seq != 0, 1)
+
                 # Label
                 all_label_seq = all_label_seq_dict[train_sample_num - 1]
                 history_label_seq = torch.Tensor(all_label_seq[seq_label_idx].todense()) # FIX
@@ -285,12 +296,13 @@ def run_experiment(args, n_hidden=None, n_layers=None, dropout=None, n_bases=Non
                 if use_cuda:
                     history_tail_seq, one_hot_tail_seq = history_tail_seq.to(args.gpu), one_hot_tail_seq.to(args.gpu)
                     one_hot_label_seq = one_hot_label_seq.to(args.gpu)
+                    one_hot_trust_label = one_hot_trust_label.to(args.gpu)
 
                 history_glist = [build_sub_graph(num_nodes, num_rels, snap, use_cuda, args.gpu) for snap in input_list]
                 
                 output = [torch.from_numpy(_).long().cuda() for _ in output] if use_cuda else [torch.from_numpy(_).long() for _ in output]
 
-                loss_e = model.get_loss(history_glist, output[0], static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, use_cuda)
+                loss_e = model.get_loss(history_glist, output[0], static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, use_cuda)
                 loss = loss_e
 
                 losses.append(loss.item())
@@ -365,6 +377,11 @@ def run_experiment(args, n_hidden=None, n_layers=None, dropout=None, n_bases=Non
                     one_hot_tail_seq = history_tail_seq.masked_fill(history_tail_seq != 0, 1)
                     # history_tail_seq, one_hot_tail_seq = None, None
 
+                    # Trust label
+                    trust_label = all_tail_seq_dict[train_sample_num]
+                    trust_label_seq = torch.Tensor(trust_label[seq_idx].todense())
+                    one_hot_trust_label = trust_label_seq.masked_fill(trust_label_seq != 0, 1)
+
                     # Label
                     all_label_seq = all_label_seq_dict[train_sample_num - 1]
                     history_label_seq = torch.Tensor(all_label_seq[seq_label_idx].todense()) # FIX
@@ -374,10 +391,11 @@ def run_experiment(args, n_hidden=None, n_layers=None, dropout=None, n_bases=Non
                     if use_cuda:
                         history_tail_seq, one_hot_tail_seq = history_tail_seq.to(args.gpu), one_hot_tail_seq.to(args.gpu)
                         one_hot_label_seq = one_hot_label_seq.to(args.gpu)
+                        one_hot_trust_label = one_hot_trust_label.to(args.gpu)
                     
                     history_glist = [build_sub_graph(num_nodes, num_rels, snap, use_cuda, args.gpu) for snap in input_list]
                     output = [torch.from_numpy(_).long().cuda() for _ in output] if use_cuda else [torch.from_numpy(_).long() for _ in output]
-                    loss_linear = model.get_loss_classifier(history_glist, output[0], static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, use_cuda)
+                    loss_linear = model.get_loss_classifier(history_glist, output[0], static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, use_cuda)
                     if loss_linear is not None:
                         error = loss_linear
                         losses.append(loss_linear.item())
@@ -442,7 +460,7 @@ if __name__ == '__main__':
                         help="train classifier to create mask")
     parser.add_argument("--linear-lr", type=float, default=0.001,
                         help="learning rate linear classifier")
-    parser.add_argument("--linear_classifier_mode", type=str, default='soft', help="soft and hard mode for Linear Classifier")
+    parser.add_argument("--linear_classifier_mode", type=str, default='divergent', help="convergent and divergent mode for sLinear Classifier")
     parser.add_argument("--load-pretrain", action='store_true', default=False,
                         help="loading checkpoint, continuing training.")
 

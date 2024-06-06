@@ -264,7 +264,7 @@ class RecurrentRGCN(nn.Module):
         return history_embs, static_emb, rel_embs, gate_list, degree_list
 
 
-    def predict(self, test_graph, num_rels, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, test_triplets, use_cuda, mode):
+    def predict(self, test_graph, num_rels, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, test_triplets, use_cuda, mode):
         '''
         :param test_graph:
         :param num_rels:
@@ -281,8 +281,7 @@ class RecurrentRGCN(nn.Module):
             all_triples = torch.cat((test_triplets, inverse_test_triplets)) # (batch_size, 3)
             s = all_triples[:,0]
             r = all_triples[:,1]
-            o = all_triples[:,2]
-            classifier_loss = None
+            acc = None
             
             evolve_embs, _, r_embs, _, _ = self.forward(test_graph, static_graph, use_cuda)
             score, combine_info = self.decoder_ob.forward(evolve_embs, r_embs, all_triples, history_tail_seq, one_hot_tail_seq, self.layer_norm, use_cuda, mode="test")
@@ -301,25 +300,24 @@ class RecurrentRGCN(nn.Module):
                 softmax_frequency = F.softmax(history_tail_seq, dim=1)
                 frequency_hidden = self.tanh(self.linear_frequency(softmax_frequency))
 
-                classifier_loss, pred, acc = self.linear_classifier_loss(s, r, combine_info, labels, frequency_hidden)
+                _, pred, acc = self.linear_classifier_loss(s, r, combine_info, labels, frequency_hidden)
                 mask = (torch.zeros(all_triples.shape[0], self.num_ents)).to(self.gpu)
                 for i in range(all_triples.shape[0]):
                     if pred[i].item() > 0.5:
-                        mask[i, history_id[i]] = 1
-                    else:
                         mask[i, :] = 1
                         mask[i, history_id[i]] = 0
-#                mask = one_hot_label_seq
-                mask = torch.tensor(np.array(one_hot_label_seq.cpu() == 0, dtype=float)).to(self.gpu)
-                # mask = torch.tensor(np.array(one_hot_tail_seq.cpu() == 0, dtype=float)).to(self.gpu)
-                if self.linear_classifier_mode == 'soft':
-                    mask = F.softmax(mask, dim=1)
+                    else:
+                        mask[i, history_id[i]] = 1
+                # mask = torch.tensor(np.array(one_hot_label_seq.cpu() == 0, dtype=float)).to(self.gpu)
+                if self.linear_classifier_mode == 'convergent':
+                    mask = torch.tensor(np.array(mask.cpu() == 0, dtype=float)).to(self.gpu)
+                mask = F.softmax(mask, dim=1)
                 score = torch.mul(score, mask)
             
-            return all_triples, score, classifier_loss # (batch_size, 3) (batch_size, num_ents)
+            return all_triples, score, acc # (batch_size, 3) (batch_size, num_ents)
 
 
-    def get_loss(self, glist, triples, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, use_cuda):
+    def get_loss(self, glist, triples, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, use_cuda):
         """
         :param glist:
         :param triplets:
@@ -339,6 +337,7 @@ class RecurrentRGCN(nn.Module):
         r = all_triples[:,1]
 
         evolve_embs, static_emb, r_embs, _, _ = self.forward(glist, static_graph, use_cuda)
+        # pre_emb = F.normalize(evolve_embs[-1]) if self.layer_norm else evolve_embs[-1]
         if self.entity_prediction:
             scores_ob, combine_info = self.decoder_ob.forward(evolve_embs, r_embs, all_triples, history_tail_seq=None, one_hot_tail_seq=None, layer_norm=self.layer_norm, use_cuda=use_cuda)
             scores_ob = scores_ob.view(-1, self.num_ents)
@@ -347,7 +346,7 @@ class RecurrentRGCN(nn.Module):
         # Contrastive learning
         labels = []
         for i, col in enumerate(all_triples[:, 2]):
-            labels.append(one_hot_label_seq[i,col].item())
+            labels.append(one_hot_tail_seq[i,col].item())
         labels = torch.Tensor(labels).to(self.gpu).unsqueeze(1)
         softmax_frequency = F.softmax(history_tail_seq, dim=1)
         frequency_hidden = self.tanh(self.linear_frequency(softmax_frequency))
@@ -356,7 +355,7 @@ class RecurrentRGCN(nn.Module):
         loss = loss_ent*self.alpha + spc_loss*(1-self.alpha)
         return loss
         
-    def get_loss_classifier(self, glist, triples, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, use_cuda):
+    def get_loss_classifier(self, glist, triples, static_graph, history_tail_seq, one_hot_tail_seq, one_hot_label_seq, one_hot_trust_label, use_cuda):
         loss = torch.zeros(1).cuda().to(self.gpu) if use_cuda else torch.zeros(1)
 
         inverse_triples = triples[:, [2, 1, 0]]
@@ -367,6 +366,7 @@ class RecurrentRGCN(nn.Module):
         r = all_triples[:,1]
 
         evolve_embs, static_emb, r_embs, _, _ = self.forward(glist, static_graph, use_cuda)
+        # pre_emb = F.normalize(evolve_embs[-1]) if self.layer_norm else evolve_embs[-1]
         if self.entity_prediction:
             scores_ob, combine_emb = self.decoder_ob.forward(evolve_embs, r_embs, all_triples, history_tail_seq=None, one_hot_tail_seq=None, layer_norm=self.layer_norm, use_cuda=use_cuda)
 
